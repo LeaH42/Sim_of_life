@@ -1,21 +1,26 @@
 General structure:
 
 Class Cell:
-	variables:	list of neighbors (Cells)
-			tuple of up/down - left/right position (int,int)
-			tuple with states (old/new)
-			pointer to state
+	variables:	
+		list of neighbors (Cells)
+		tuple of x,y position (int,int)
+		tuple with states (old/new)
+		pointer to state
 
 
-	methods:	stay_alive(list of neighbors, state) -> True/False
+	methods:
+		stay_alive(list of neighbors, state) -> True/False
 
 
 main:
-	variables:	2D array with Cells (index = position)
+	variables:	
+		2D array with Cells (index = position)
 
 
 
-	methods:	initialize_neighbors (2d list with Cells)
-			update_fkt(2d list with Cells)
-			output()
+	methods:
+		initialize_cells (initialize all cells)	
+		initialize_neighbors (2d list with Cells) -> void
+		update (2d list with Cells)
+		output()
 			
