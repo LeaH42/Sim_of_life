@@ -8,6 +8,10 @@ Class Cell:
 		pointer to state
 
 	methods:
+		update()
+			------------------
+			(NEU: diese Methode ist notwendig, um von der main-Methode aus aufgerufen werden zu können! Sie sollte einfach nur stay_alive verarbeiten. Oder hast Du eine bessere Idee?)
+			------------------
 		stay_alive(list of neighbors, state) -> True/False
 
 main:
@@ -20,4 +24,3 @@ main:
 		initialize_neighbors (2d list with Cells) -> void
 		update (2d list with Cells) -> void
 		output() -> void
-			
