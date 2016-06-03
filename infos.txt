@@ -7,20 +7,17 @@ Class Cell:
 		tuple with states (old/new)
 		pointer to state
 
-
 	methods:
 		stay_alive(list of neighbors, state) -> True/False
-
 
 main:
 	variables:	
 		2D array with Cells (index = position)
-
-
+		dim=(width,length)
 
 	methods:
-		initialize_cells (initialize all cells)	
+		initialize_cells (width,length) -> 2d array with cells	
 		initialize_neighbors (2d list with Cells) -> void
-		update (2d list with Cells)
-		output()
+		update (2d list with Cells) -> void
+		output() -> void
 			
