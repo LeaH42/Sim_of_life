@@ -4,16 +4,21 @@ Class Cell:
 	variables:	
 		neighbors  {list of neighbors}
 		tuple of x,y position (int,int)
-		state {(old/new) tuple with states}
+		state {(old/new) list with states} (ich habe gerade gelernt, dass man tuple nicht überschreiben darf...)
 		state_pointer {pointer to new state}
 
 	methods:
+		__init__((x,y), state)
 		stay_alive(list of neighbors, state) -> True/False
-		update()
+
 			------------------
 			(NEU: diese Methode ist notwendig, um von der main-Methode aus aufgerufen werden zu können! Sie sollte einfach nur stay_alive verarbeiten. Oder hast Du eine bessere Idee?)
+			Ja. stay_alive selbst aufrufen und den Pointer separat updaten. das muss sowieso gemacht werden, wenn wir alle Zellen gleichzeitig updaten wollen. deshalb:
 			------------------
+
+		update_pointer()
 		get_state() --> Boolean
+
 			-------
 			(NEU: wichtig, um von main unkompliziert den zustand abfragen zu können)
 			-------
@@ -25,6 +30,7 @@ main:
 
 	methods:
 		initialize_cells (width,length) -> 2d array with cells	
-		initialize_neighbors (2d list with Cells) -> void
+		initialize_neighbors (2d list with Cells, width, length) -> void (für deine boundaries)
+		random_state() --> Boolean 	(damit Zellen mit random state initialisiert werden)
 		update (2d list with Cells) -> void
 		output() -> void
