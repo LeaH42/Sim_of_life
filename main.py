@@ -6,7 +6,7 @@ import random
 # --- variables -------------------------------------
 
 dim=(10,10)
-time_steps=10
+time_steps=100
 
 # --- methods ---------------------------------------
 
@@ -29,8 +29,7 @@ def initialize_neighbors(area, width, length):
 				area[x][y].neighbors[i]=area[pos_x][pos_y]
 
 def random_state():
-	state=(False, True)
-	return state[random.randint(0,1)]
+	return random.randint(0,1)==0
 		
 
 def update(area):
@@ -51,11 +50,11 @@ def output():
 		for x in range(len(area[0])):
 			# I changed the letters. "L" for "living" is more intuitive, isnt it?
 			if area[x][y].get_state():
-				out+="L"
+				out+=" "
 			else:
 				out+="X"
 		print out
-	print('\n')
+	print('')
 
 # --- main process -----------------------------------
 
@@ -66,5 +65,6 @@ output()
 for t in range(time_steps):
 	update(area)
 	output()
+	time.sleep(0.5)
 
 print "program finished. ("+str(int((time.time()-t_start)*1000))+" ms)"
