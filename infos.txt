@@ -2,17 +2,21 @@ General structure:
 
 Class Cell:
 	variables:	
-		list of neighbors (Cells)
+		neighbors  {list of neighbors}
 		tuple of x,y position (int,int)
-		tuple with states (old/new)
-		pointer to state
+		state {(old/new) tuple with states}
+		state_pointer {pointer to new state}
 
 	methods:
+		stay_alive(list of neighbors, state) -> True/False
 		update()
 			------------------
 			(NEU: diese Methode ist notwendig, um von der main-Methode aus aufgerufen werden zu können! Sie sollte einfach nur stay_alive verarbeiten. Oder hast Du eine bessere Idee?)
 			------------------
-		stay_alive(list of neighbors, state) -> True/False
+		get_state() --> Boolean
+			-------
+			(NEU: wichtig, um von main unkompliziert den zustand abfragen zu können)
+			-------
 
 main:
 	variables:	
