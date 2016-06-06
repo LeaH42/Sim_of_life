@@ -2,11 +2,12 @@ import time
 t_start=time.time()
 import cell
 import random
+import pylab as plt
 
 # --- variables -------------------------------------
 
 dim=(10,10)
-time_steps=20
+time_steps=5
 
 # --- methods ---------------------------------------
 
@@ -53,15 +54,27 @@ def output():
 		print out
 	print('')
 
+def plot():
+	for y in range(len(area)):	
+		for x in range(len(area[0])):
+			if area[x][y].get_state():
+				plt.plot(x,y,'sk')
+	plt.xlim(-1, len(area[0])+1)
+	plt.ylim(-1, len(area)+1)
+	plt.axis("off")
+	plt.show()
+
 # --- main process -----------------------------------
 
 area=initialize_cells(dim[0],dim[1])
 initialize_neighbors(area, dim[0],dim[1])
-output()
+#output()
+plot()
 
 for t in range(time_steps):
 	update(area)
-	output()
+	#output()
+	plot()
 	time.sleep(0.5) #why?
 
 print "program finished. ("+str(int((time.time()-t_start)*1000))+" ms)"
