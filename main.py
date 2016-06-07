@@ -20,8 +20,8 @@ def initialize_neighbors(area, width, length):
 	for y in range(len(area)):
 		for x in range(len(area[0])):
 			coo=[	(x-1,y-1),(x,y-1),(x+1,y-1),	# 012 
-						(x-1,y  ),        (x+1,y  ),	# 3 4
-						(x-1,y+1),(x,y+1),(x+1,y+1)]	# 567
+					(x-1,y  ),        (x+1,y  ),	# 3 4
+					(x-1,y+1),(x,y+1),(x+1,y+1)]	# 567
 			for i in range(8):
 				pos_x=coo[i][0]%width
 				pos_y=coo[i][1]%length
