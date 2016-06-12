@@ -2,7 +2,9 @@ import time
 t_start=time.time()
 import cell
 import random
+import matplotlib.animation as animation
 import pylab as plt
+import copy
 
 # --- variables -------------------------------------
 
@@ -64,17 +66,61 @@ def plot():
 	plt.axis("off")
 	plt.show()
 
+def plotvecs(areas,dim):    
+
+    # figure initialization
+    fig = plt.figure()
+    ax = plt.axes(xlim=(0, dim[0]), ylim=(0, dim[1]))
+
+    lines = [ plt.plot([], [], 'sk', ms=10)[0]]
+
+    # empty lines
+    def init():    
+        for line in lines:
+            line.set_data([], [])
+        return lines
+    
+    #lines[] gets x and y list
+    def animate(i): 
+	xdata=[]
+	ydata=[]
+	for y in range(len(areas[i])):
+		for x in range(len(areas[i][0])):
+			if areas[i][x][y]:
+				xdata.append(x)
+				ydata.append(y)
+        lines[0].set_data( xdata, ydata )
+        return lines
+
+    anim = animation.FuncAnimation(fig, animate, init_func=init, frames=6, interval=500, blit=False,repeat=False)
+
+    plt.xlim(-1, len(area[0])+1)
+    plt.ylim(-1, len(area)+1)
+    plt.axis("off")
+    plt.show()
+
+
+def convert_area(area):
+	states=[[False for x in range(len(area[0]))] for y in range(len(area))]
+	for y in range(len(area)):
+		for x in range(len(area[0])):
+			if area[x][y].get_state():
+				states[x][y]=True
+	return states
+	
+
 # --- main process -----------------------------------
 
 area=initialize_cells(dim[0],dim[1])
 initialize_neighbors(area, dim[0],dim[1])
-#output()
-plot()
+areas=[]
+areas.append(convert_area(area))
 
 for t in range(time_steps):
 	update(area)
-	#output()
-	plot()
+	areas.append(convert_area(area))
 	time.sleep(0.5) #why?
+
+plotvecs(areas, dim)
 
 print "program finished. ("+str(int((time.time()-t_start)*1000))+" ms)"
