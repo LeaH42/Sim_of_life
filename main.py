@@ -4,18 +4,18 @@ import cell
 import random
 import matplotlib.animation as animation
 import pylab as plt
-import copy
 
 # --- variables -------------------------------------
 
 dim=(100,100)
 time_steps=75
+perc=0.5		#percentage of initially living cells
 
 # --- methods ---------------------------------------
 
-def initialize_cells(width,length):
+def initialize_cells(width,length, perc):
 	# how do you want to initialize the state of the cell?
-	area=[[cell.cell((x,y), random_state()) for x in range(width)] for y in range(length)]
+	area=[[cell.cell((x,y), random_state(perc)) for x in range(width)] for y in range(length)]
 	return area
 
 def initialize_neighbors(area):
@@ -29,8 +29,8 @@ def initialize_neighbors(area):
 				pos_y=coo[i][1]%len(area)
 				area[x][y].neighbors[i]=area[pos_x][pos_y]
 
-def random_state():
-	return random.randint(0,1)==0
+def random_state(perc):
+	return random.randint(0,100)<perc*100
 		
 
 def update(area):
@@ -72,7 +72,7 @@ def convert_area(area):
 
 # --- main process -----------------------------------
 
-area=initialize_cells(dim[0],dim[1])
+area=initialize_cells(dim[0],dim[1], perc)
 initialize_neighbors(area)
 areas=[]
 areas.append(convert_area(area))
