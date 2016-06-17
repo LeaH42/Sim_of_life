@@ -18,15 +18,15 @@ def initialize_cells(width,length):
 	area=[[cell.cell((x,y), random_state()) for x in range(width)] for y in range(length)]
 	return area
 
-def initialize_neighbors(area, width, length):
+def initialize_neighbors(area):
 	for y in range(len(area)):
 		for x in range(len(area[0])):
 			coo=[	(x-1,y-1),(x,y-1),(x+1,y-1),	# 012 
 					(x-1,y  ),        (x+1,y  ),	# 3 4
 					(x-1,y+1),(x,y+1),(x+1,y+1)]	# 567
 			for i in range(8):
-				pos_x=coo[i][0]%width
-				pos_y=coo[i][1]%length
+				pos_x=coo[i][0]%len(area[0])
+				pos_y=coo[i][1]%len(area)
 				area[x][y].neighbors[i]=area[pos_x][pos_y]
 
 def random_state():
@@ -43,28 +43,6 @@ def update(area):
 	for y in range(len(area)):
 		for x in range(len(area[0])):
 			area[x][y].update_pointer()
-	
-
-def output():
-	for y in range(len(area)):
-		out=" "
-		for x in range(len(area[0])):
-			if area[x][y].get_state():
-				out+=" "
-			else:
-				out+="X"
-		print out
-	print('')
-
-def plot():
-	for y in range(len(area)):	
-		for x in range(len(area[0])):
-			if area[x][y].get_state():
-				plt.plot(x,y,'sk')
-	plt.xlim(-1, len(area[0])+1)
-	plt.ylim(-1, len(area)+1)
-	plt.axis("off")
-	plt.show()
 
 def plotvecs(areas,dim):    
 
@@ -72,7 +50,6 @@ def plotvecs(areas,dim):
     fig = plt.figure()
     ax = plt.axes(xlim=(0, dim[0]), ylim=(0, dim[1]))
     
-    #lines[] gets x and y list
     def animate(i): 
         ax.imshow(areas[i], cmap='Greys', interpolation='none')
 
@@ -96,7 +73,7 @@ def convert_area(area):
 # --- main process -----------------------------------
 
 area=initialize_cells(dim[0],dim[1])
-initialize_neighbors(area, dim[0],dim[1])
+initialize_neighbors(area)
 areas=[]
 areas.append(convert_area(area))
 
