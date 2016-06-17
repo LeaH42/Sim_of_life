@@ -8,8 +8,8 @@ import copy
 
 # --- variables -------------------------------------
 
-dim=(200,200)
-time_steps=50
+dim=(100,100)
+time_steps=75
 
 # --- methods ---------------------------------------
 
@@ -76,7 +76,7 @@ def plotvecs(areas,dim):
     def animate(i): 
         ax.imshow(areas[i], cmap='Greys', interpolation='none')
 
-    anim = animation.FuncAnimation(fig, animate, frames=time_steps+1, interval=100, blit=False,repeat=False)
+    anim = animation.FuncAnimation(fig, animate, frames=time_steps+1, interval=10, blit=False,repeat=False)
 
     plt.xlim(-1, len(area[0])+1)
     plt.ylim(-1, len(area)+1)
